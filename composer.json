@@ -1,0 +1,11 @@
+{
+    "name": "tsawler/acme",
+    "description": "Intermediate PHP course",
+    "authors": [
+        {
+            "name": "Trevor Sawler",
+            "email": "trevor.sawler@gmail.com"
+        }
+    ],
+    "require": {}
+}
