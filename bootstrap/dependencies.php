@@ -22,4 +22,13 @@ $injector->share('Http\HttpResponse');
 $injector->alias('App\Session\Session', 'App\Session\NativeSession');
 $injector->share('App\Session\Session');
 
+
+$injector->alias('duncan3dc\Laravel\BladeInstance', 'duncan3dc\Laravel\BladeInstance');
+$injector->share('duncan3dc\Laravel\BladeInstance');
+$injector->define('duncan3dc\Laravel\BladeInstance', [
+    ':path'     => getenv('VIEWS_DIRECTORY'),
+    ':cache'    => getenv('CACHE_DIRECTORY')
+]);
+
+
 return $injector;
