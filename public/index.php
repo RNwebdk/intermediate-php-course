@@ -7,6 +7,8 @@ $injector = include __DIR__ . '/../bootstrap/dependencies.php';
 $request = $injector->make('Http\Request');
 $response = $injector->make('Http\Response');
 
+$injector->make('duncan3dc\Laravel\BladeInstance');
+
 /**
  * Session
  */

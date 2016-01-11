@@ -2,31 +2,26 @@
 
 namespace App\Controllers;
 
-use App\Session\Session;
-use Http\HttpRequest;
-use Http\HttpResponse;
+use App\models\Page;
 
-class HomeController {
-
-    private $request;
-    private $response;
-    private $session;
-
-    public function __construct(HttpRequest $request, HttpResponse $response, Session $session)
-    {
-        $this->response = $response;
-        $this->request = $request;
-        $this->session = $session;
-    }
+class HomeController extends BaseController {
 
     public function show()
     {
-        $this->response->setContent("Returned from controller");
+        $this->response->setContent($this->blade->render("home", ['test' => 'abc123']));
     }
 
 
     public function test()
     {
         $this->response->setContent("This is another method");
+    }
+
+
+    public function testPage()
+    {
+        $page = Page::find(1);
+        $content = $page->page_content;
+        $this->response->setContent($content);
     }
 }
