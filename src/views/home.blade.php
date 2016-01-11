@@ -8,5 +8,6 @@
 
 <p>This is the homepage.</p>
 
+<p>This variable was passed: {!! $test or 'no variable passed' !!}</p>
 </body>
 </html>
