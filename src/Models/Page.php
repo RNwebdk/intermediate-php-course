@@ -1,9 +1,8 @@
 <?php
 namespace App\models;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Page extends Eloquent
+class Page extends BaseModel
 {
 
 }
