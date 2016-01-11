@@ -31,7 +31,6 @@ $routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
 
 // dispatch to route
 $dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
-
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
 
 switch ($routeInfo[0]) {
