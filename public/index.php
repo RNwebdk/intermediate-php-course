@@ -2,29 +2,26 @@
 require __DIR__ . '/../bootstrap/start.php';
 require __DIR__ . '/../bootstrap/functions.php';
 require __DIR__ . '/../bootstrap/db.php';
+
+// create our injector from dependencies
 $injector = include __DIR__ . '/../bootstrap/dependencies.php';
 
+// inject request & response
 $request = $injector->make('Http\Request');
 $response = $injector->make('Http\Response');
 
+// inject blade
 $injector->make('duncan3dc\Laravel\BladeInstance');
 
-/**
- * Session
- */
+// inject session
 $session = $injector->make('App\Session\Session');
 
-/**
- * set headers
- */
+// set response headers
 foreach ($response->getHeaders() as $header) {
     header($header, false);
 }
 
-/**
- * set up routes
- * @param \FastRoute\RouteCollector $r
- */
+// set up our routes
 $routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
     $routes = include(__DIR__ . '/../src/routes.php');
     foreach ($routes as $route) {
@@ -32,12 +29,10 @@ $routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
     }
 };
 
-/**
- * Routes
- */
+// dispatch to route
 $dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
-
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
+
 switch ($routeInfo[0]) {
     case \FastRoute\Dispatcher::NOT_FOUND:
         $response->setContent('404 - Page not found');
@@ -56,7 +51,5 @@ switch ($routeInfo[0]) {
         break;
 }
 
-/**
- * Show final page
- */
+// show final page to user
 echo $response->getContent();

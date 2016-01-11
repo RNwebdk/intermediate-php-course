@@ -3,7 +3,7 @@
 // di
 $injector = new \Auryn\Injector;
 
-// requeest and response
+// request and response
 $injector->alias('Http\Response', 'Http\HttpResponse');
 $injector->share('Http\HttpRequest');
 $injector->define('Http\HttpRequest', [
@@ -17,12 +17,11 @@ $injector->define('Http\HttpRequest', [
 $injector->alias('Http\Request', 'Http\HttpRequest');
 $injector->share('Http\HttpResponse');
 
-
 // session
 $injector->alias('App\Session\Session', 'App\Session\NativeSession');
 $injector->share('App\Session\Session');
 
-
+// blade
 $injector->alias('duncan3dc\Laravel\BladeInstance', 'duncan3dc\Laravel\BladeInstance');
 $injector->share('duncan3dc\Laravel\BladeInstance');
 $injector->define('duncan3dc\Laravel\BladeInstance', [
