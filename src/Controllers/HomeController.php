@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-
 use App\models\Page;
 
 class HomeController extends BaseController {
