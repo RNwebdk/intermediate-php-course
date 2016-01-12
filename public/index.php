@@ -14,11 +14,7 @@ $response = $injector->make('Http\Response');
 $injector->make('duncan3dc\Laravel\BladeInstance');
 
 // inject session
-$injector->make('App\Session\Session');
-
-// inject logger
-$injector->make('Monlog\Logger');
-$injector->make('App\Logging\Log');
+$session = $injector->make('App\Session\Session');
 
 // set response headers
 foreach ($response->getHeaders() as $header) {
