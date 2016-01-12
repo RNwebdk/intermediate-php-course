@@ -17,6 +17,7 @@ $injector->make('duncan3dc\Laravel\BladeInstance');
 $injector->make('App\Session\Session');
 
 // inject logger
+$injector->make('Monlog\Logger');
 $injector->make('App\Logging\Log');
 
 // set response headers
