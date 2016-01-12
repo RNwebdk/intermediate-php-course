@@ -16,6 +16,10 @@ $injector->make('duncan3dc\Laravel\BladeInstance');
 // inject session
 $session = $injector->make('App\Session\Session');
 
+// logger
+$injector->make('Monolog\Logger');
+$injector->make('App\Logging\Log');
+
 // set response headers
 foreach ($response->getHeaders() as $header) {
     header($header, false);
