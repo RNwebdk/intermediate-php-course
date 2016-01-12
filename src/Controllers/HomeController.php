@@ -34,4 +34,14 @@ class HomeController extends BaseController {
         $this->logError('test entry');
     }
 
+    public function testSession()
+    {
+        if ($this->session->has('savedValue')) {
+            $this->response->setContent("Value in session is " . $this->session->get('savedValue'));
+        } else {
+            $this->session->put('savedValue', 'My Value');
+            $this->response->setContent("No value in session!");
+        }
+    }
+
 }
