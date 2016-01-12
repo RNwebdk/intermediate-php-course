@@ -1,39 +1,54 @@
+#!/usr/bin/env php
 <?php
+require __DIR__ . "/vendor/autoload.php";
+
 $command = "error";
 $name = "";
 
-if ((isset($argv[1]) && (isset($argv[2])))) {
+if (isset($argv[1])) {
     $command = $argv[1];
-    $name = $argv[2];
+    if (isset($arg[2]))
+        $name = $argv[2];
 }
 
-if (strlen($name) > 0) {
-    switch($command){
-        case ('model'):
-            if (file_exists(__DIR__ . "/src/Models/" . $name . ".php")) {
-                printf("Model already exists! Aborting...");
-                printf("\n\r");
-                exit;
-            } else {
-                makeModel($name);
-            }
-            break;
-
-        case ('controller'):
-            if (file_exists(__DIR__ . "/src/Controllers/" . $name . ".php")) {
-                printf("Controller already exists! Aborting...");
-                printf("\n\r");
-                exit;
-            } else {
-                makeController($name);
-            }
-            break;
-
-        default:
-            printf("Command not known. Usage: php app <command> <name>");
+switch ($command) {
+    case ('model'):
+        if (file_exists(__DIR__ . "/src/Models/" . $name . ".php")) {
+            printf("Model already exists! Aborting...");
             printf("\n\r");
-            printf("Available commands: model, controller");
-    }
+            exit;
+        } else {
+            makeModel($name);
+        }
+        break;
+
+    case ('controller'):
+        if (file_exists(__DIR__ . "/src/Controllers/" . $name . ".php")) {
+            printf("Controller already exists! Aborting...");
+            printf("\n\r");
+            exit;
+        } else {
+            makeController($name);
+        }
+        break;
+
+    case ('migrate'):
+        $phinxApp = new \Phinx\Console\PhinxApplication();
+        $phinxTextWrapper = new \Phinx\Wrapper\TextWrapper($phinxApp);
+        $phinxTextWrapper->setOption('configuration', __DIR__ . '/phinx.yml');
+        $phinxTextWrapper->setOption('parser', 'YAML');
+        $phinxTextWrapper->setOption('environment', 'development');
+        $log = $phinxTextWrapper->getMigrate();
+        break;
+
+    case ('migration'):
+
+        break;
+
+    default:
+        printf("Command not known. Usage: php app <command> <name>");
+        printf("\n\r");
+        printf("Available commands: model, controller, migration, migrate");
 }
 
 printf("\n\r");

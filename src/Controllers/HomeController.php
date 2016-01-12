@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\models\Page;
+use App\Logging\Log;
 
 class HomeController extends BaseController {
 
@@ -23,5 +24,13 @@ class HomeController extends BaseController {
         $page = Page::find(1);
         $content = $page->page_content;
         $this->response->setContent($content);
+    }
+
+    public function testPageAndLog()
+    {
+        $page = Page::find(1);
+        $content = $page->page_content;
+        $this->response->setContent($content);
+        $this->logError('test entry');
     }
 }

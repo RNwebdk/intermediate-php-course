@@ -29,5 +29,4 @@ $injector->define('duncan3dc\Laravel\BladeInstance', [
     ':cache'    => getenv('CACHE_DIRECTORY')
 ]);
 
-
 return $injector;
