@@ -6,17 +6,17 @@ use Monolog\Handler\StreamHandler;
 
 class Log {
 
-    private $infoLog;
-    private $warningLog;
-    private $errorLog;
+    protected $infoLog;
+    protected $warningLog;
+    protected $errorLog;
 
-    public function __construct()
+    public function __construct(Logger $infoLog, Logger $warningLog, Logger $errorLog)
     {
-        $this->infoLog = new Logger('info');
+        $this->infoLog = $infoLog;
         $this->infoLog->pushHandler(new StreamHandler(getenv('LOG_FILE') . '/info.log', Logger::INFO));
-        $this->warningLog = new Logger('warning');
+        $this->warningLog = $warningLog;
         $this->warningLog->pushHandler(new StreamHandler(getenv('LOG_FILE') . '/warning.log', Logger::WARNING));
-        $this->errorLog = new Logger('error');
+        $this->errorLog = $errorLog;
         $this->errorLog->pushHandler(new StreamHandler(getenv('LOG_FILE') . '/error.log', Logger::ERROR));
     }
 
@@ -24,16 +24,22 @@ class Log {
     public function logInfo($entry)
     {
         $this->infoLog->addInfo($entry);
+
+        return true;
     }
 
 
     public function logWarning($entry)
     {
         $this->warningLog->addWarning($entry);
+
+        return true;
     }
 
     public function logError($entry)
     {
         $this->errorLog->addError($entry);
+
+        return true;
     }
 }
