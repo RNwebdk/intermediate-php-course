@@ -29,4 +29,9 @@ $injector->define('duncan3dc\Laravel\BladeInstance', [
     ':cache'    => getenv('CACHE_DIRECTORY')
 ]);
 
+// monolog
+$injector->define('Monolog\Logger', [
+    ':name'     => 'applogger'
+]);
+
 return $injector;
