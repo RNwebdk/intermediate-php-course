@@ -2,7 +2,6 @@
 namespace App\models;
 
 
-class Page extends BaseModel
-{
+class Page extends BaseModel {
 
 }
