@@ -4,12 +4,29 @@ namespace App\Controllers;
 
 use App\models\Page;
 use App\Exceptions\PageNotFoundException;
+use Http\HttpRequest;
+use Http\HttpResponse;
+use App\Session\Session;
+use duncan3dc\Laravel\BladeInstance;
+use App\Logging\Log;
+
 
 class PageController extends BaseController {
 
+    protected $page;
+
+    public function __construct(HttpRequest $request, HttpResponse $response,
+                                Session $session, BladeInstance $blade, Log $logger,
+                                Page $page)
+    {
+        parent::__construct($request, $response, $session, $blade, $logger);
+        $this->page = $page;
+    }
+
+
     public function showHome()
     {
-        $this->response->setContent($this->blade->render("home", ['test' => 'abc123']));
+        return $this->response->setContent($this->blade->render("home", ['test' => 'abc123']));
     }
 
 
@@ -17,20 +34,37 @@ class PageController extends BaseController {
     {
         try {
             $slug = $params['slug'];
-            $page = Page::where('slug', '=', $slug)->first();
+            $result = $this->getPageBySlug($slug);
 
-            if ($page === null)
-                throw new PageNotFoundException($page);
+            if (!$result) {
+                throw new PageNotFoundException($result);
+                return false;
+            } else {
+                return $this->response->setContent($this->blade->render("inside-page", $result));
+            }
 
-            $data['page_content'] = $page->page_content;
-            $data['page_title'] = $page->page_title;
-            $data['browser_title'] = $page->browser_title;
-
-            $this->response->setContent($this->blade->render("inside-page", $data));
         } catch (PageNotFoundException $e) {
             if ($slug !== 'favicon.ico')
                 $this->logWarning("User tried to access page with unknown slug: " . $slug);
             $e->handle($slug);
+
+            return $e;
+        }
+    }
+
+
+    protected function getPageBySlug($slug)
+    {
+        $result = $this->page->where('slug', '=', $slug)->first();
+
+        if ($result !== null) {
+            return [
+                'page_title'    => $result->page_title,
+                'page_content'  => $result->page_content,
+                'browser_title' => $result->browser_title,
+            ];
+        } else {
+            return false;
         }
     }
 

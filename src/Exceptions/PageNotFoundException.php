@@ -9,6 +9,5 @@ class PageNotFoundException extends \Exception {
             . ' in '
             . $this->getFile()
             . ': <br>' . $page . ' is an unknown page';
-        die();
     }
 }
