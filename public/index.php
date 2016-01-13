@@ -20,6 +20,9 @@ $session = $injector->make('App\Session\Session');
 $injector->make('Monolog\Logger');
 $injector->make('App\Logging\Log');
 
+// inject page model
+$injector->make('App\Models\Page');
+
 // set response headers
 foreach ($response->getHeaders() as $header) {
     header($header, false);
