@@ -7,7 +7,7 @@ $name = "";
 
 if (isset($argv[1])) {
     $command = $argv[1];
-    if (isset($arg[2]))
+    if (isset($argv[2]))
         $name = $argv[2];
 }
 
