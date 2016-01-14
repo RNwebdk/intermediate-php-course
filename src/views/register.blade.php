@@ -18,7 +18,7 @@
             <h1>Register</h1>
             <hr>
 
-            <form class="form" role="form" method="post" action="/register">
+            <form class="form" role="form" method="post" action="/register" novalidate="novalidate">
 
                 <div class="form-group">
                     <label for="first_name">First Name</label>
@@ -48,9 +48,41 @@
                     <label for="confirm-email">Confirm Email</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
-                        <input class="form-control" type="confirm-email" name="confirm-email" id="email">
+                        <input class="form-control" type="email" name="confirm-email" id="confirm-email">
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label>Join our mailing list?</label>
+                    <div class="input-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="join_list" value="1" checked>
+                                Yes
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="join_list" value="0">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="checkbox">
+                            <label>
+                                <input name="agree" type="checkbox" value="1">
+                                I agree to abide by the site's terms and conditions
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <hr>
 
@@ -59,6 +91,8 @@
                         <input type="submit" class="btn btn-primary" value="Register">
                     </div>
                 </div>
+
+
 
 
             </form>
