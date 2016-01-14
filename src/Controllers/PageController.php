@@ -11,12 +11,28 @@ use duncan3dc\Laravel\BladeInstance;
 use App\Logging\Log;
 
 
+/**
+ * Class PageController
+ * @package App\Controllers
+ */
 class PageController extends BaseController {
 
     protected $page;
 
-    public function __construct(HttpRequest $request, HttpResponse $response,
-                                Session $session, BladeInstance $blade, Log $logger,
+    /**
+     * PageController constructor.
+     * @param HttpRequest $request
+     * @param HttpResponse $response
+     * @param Session $session
+     * @param BladeInstance $blade
+     * @param Log $logger
+     * @param Page $page
+     */
+    public function __construct(HttpRequest $request,
+                                HttpResponse $response,
+                                Session $session,
+                                BladeInstance $blade,
+                                Log $logger,
                                 Page $page)
     {
         parent::__construct($request, $response, $session, $blade, $logger);
@@ -24,12 +40,29 @@ class PageController extends BaseController {
     }
 
 
+    /**
+     * @return bool|void
+     * @throws PageNotFoundException
+     */
     public function showHome()
     {
-        return $this->response->setContent($this->blade->render("home", ['test' => 'abc123']));
+        $result = $this->getPageBySlug('home');
+
+        if (!$result) {
+            throw new PageNotFoundException($result);
+
+            return false;
+        } else {
+            return $this->response->setContent($this->blade->render("home", $result));
+        }
+
     }
 
 
+    /**
+     * @param $params
+     * @return PageNotFoundException|bool|\Exception|void
+     */
     public function showPage($params)
     {
         try {
@@ -38,6 +71,7 @@ class PageController extends BaseController {
 
             if (!$result) {
                 throw new PageNotFoundException($result);
+
                 return false;
             } else {
                 return $this->response->setContent($this->blade->render("inside-page", $result));
@@ -53,6 +87,10 @@ class PageController extends BaseController {
     }
 
 
+    /**
+     * @param $slug
+     * @return array|bool
+     */
     protected function getPageBySlug($slug)
     {
         $result = $this->page->where('slug', '=', $slug)->first();

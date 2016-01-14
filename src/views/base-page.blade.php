@@ -1,5 +1,7 @@
 @include('partials.top-of-page')
 
+@yield('slider')
+
 <div class="container pushdown">
     <divc class="row">
         <div class="col-md-12">
