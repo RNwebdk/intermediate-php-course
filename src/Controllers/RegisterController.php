@@ -1,17 +1,26 @@
 <?php
 namespace App\Controllers;
 
-use Symfony\Component\DomCrawler\Crawler;
 use Sunra\PhpSimple\HtmlDomParser;
 
+/**
+ * Class RegisterController
+ * @package App\Controllers
+ */
 class RegisterController extends BaseController {
 
+    /**
+     * @return mixed
+     */
     public function showRegister()
     {
         return $this->response->setContent($this->blade->render("register"));
     }
 
 
+    /**
+     * @return mixed
+     */
     public function handleRegister()
     {
         $rules = [
@@ -32,10 +41,20 @@ class RegisterController extends BaseController {
             $new_html = $this->repopulateForm($html, $errors, $this->request->getParameters());
 
             return $this->response->setContent($new_html);
+        } else {
+            return $this->response->setContent('Passed validation!');
         }
     }
 
 
+    /**
+     * @param $html
+     * @param $errors
+     * @param $paramters
+     * @param string $div
+     * @param string $css
+     * @return mixed
+     */
     public function repopulateForm($html, $errors, $paramters, $div = "error", $css = "alert alert-danger")
     {
         $dom = HtmlDomParser::str_get_html($html);
@@ -65,7 +84,6 @@ class RegisterController extends BaseController {
                                 $element->value = $value;
                                 break;
                             case("password"):
-
                                 $element->value = "";
                                 break;
                             default:
@@ -98,19 +116,19 @@ class RegisterController extends BaseController {
             }
         }
 
+        // generate error message
         $error_message = "<ul>";
         foreach ($errors as $error) {
             $error_message .= '<li>' . $error . '</li>';
         }
         $error_message .= "</ul>";
 
-        //$error_div = $dom->find('#' . $div)->innertext;
+        // insert error message
         $error_div = $dom->find('#' . $div, 0);
         $error_div->innertext = $error_message;
         $error_div->class = $css;
-        $new_form = $dom->save();
 
-        return $new_form;
+        return $dom->save();
     }
 
 }
