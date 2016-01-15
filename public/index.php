@@ -7,8 +7,8 @@ require __DIR__ . '/../bootstrap/db.php';
 $injector = include __DIR__ . '/../bootstrap/dependencies.php';
 
 // inject request & response
-$request = $injector->make('Http\Request');
-$response = $injector->make('Http\Response');
+$request = $injector->make('Http\HttpRequest');
+$response = $injector->make('Http\HttpResponse');
 
 // inject blade
 $injector->make('duncan3dc\Laravel\BladeInstance');
@@ -22,11 +22,6 @@ $injector->make('App\Logging\Log');
 
 // inject page model
 $injector->make('App\Models\Page');
-
-// set response headers
-foreach ($response->getHeaders() as $header) {
-    header($header, false);
-}
 
 // set up our routes
 $routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
@@ -56,6 +51,11 @@ switch ($routeInfo[0]) {
         $class = $injector->make($className);
         $class->$method($vars);
         break;
+}
+
+// set response headers
+foreach ($response->getHeaders() as $header) {
+    header($header, false);
 }
 
 // show final page to user

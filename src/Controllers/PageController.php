@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use App\models\Page;
 use App\Exceptions\PageNotFoundException;
-use Http\HttpRequest;
-use Http\HttpResponse;
+use Http\Request;
+use Http\Response;
 use App\Session\Session;
 use duncan3dc\Laravel\BladeInstance;
 use App\Logging\Log;
@@ -21,15 +21,15 @@ class PageController extends BaseController {
 
     /**
      * PageController constructor.
-     * @param HttpRequest $request
+     * @param Request $request
      * @param HttpResponse $response
      * @param Session $session
      * @param BladeInstance $blade
      * @param Log $logger
      * @param Page $page
      */
-    public function __construct(HttpRequest $request,
-                                HttpResponse $response,
+    public function __construct(Request $request,
+                                Response $response,
                                 Session $session,
                                 BladeInstance $blade,
                                 Log $logger,

@@ -18,7 +18,8 @@
         "illuminate/database": "^5.1",
         "swiftmailer/swiftmailer": "^5.4",
         "duncan3dc/blade": "^3.0",
-        "monolog/monolog": "^1.17"
+        "monolog/monolog": "^1.17",
+        "sunra/php-simple-html-dom-parser": "^1.5"
     },
     "autoload": {
         "psr-4": {

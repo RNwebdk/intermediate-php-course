@@ -6,7 +6,7 @@ h1 {
     font-weight: bolder;
 }
 .pushdown {
-    margin-top: 1.5em;
+    margin-top: 3em;
 }
 
 /* carousel fade */
@@ -81,6 +81,11 @@ h1 {
     height: 35px;
     vertical-align: middle;
     background: #c0bca2;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
 }
 a.social-icon:link, a.social-icon:visited, a.social-icon:active {
     /*margin-top: 0.25em;*/
