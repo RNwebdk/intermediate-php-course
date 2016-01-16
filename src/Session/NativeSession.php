@@ -5,7 +5,8 @@ namespace App\Session;
  * Class NativeSession
  * @package App\Session
  */
-class NativeSession implements Session {
+class NativeSession implements Session
+{
 
     /**
      * @param $item

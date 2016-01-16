@@ -7,7 +7,8 @@ use Sunra\PhpSimple\HtmlDomParser;
  * Class RegisterController
  * @package App\Controllers
  */
-class RegisterController extends BaseController {
+class RegisterController extends BaseController
+{
 
     /**
      * @return mixed

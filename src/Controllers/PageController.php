@@ -15,7 +15,8 @@ use App\Logging\Log;
  * Class PageController
  * @package App\Controllers
  */
-class PageController extends BaseController {
+class PageController extends BaseController
+{
 
     protected $page;
 
@@ -28,12 +29,8 @@ class PageController extends BaseController {
      * @param Log $logger
      * @param Page $page
      */
-    public function __construct(Request $request,
-                                Response $response,
-                                Session $session,
-                                BladeInstance $blade,
-                                Log $logger,
-                                Page $page)
+    public function __construct(Request $request, Response $response, Session $session,
+                                BladeInstance $blade, Log $logger, Page $page)
     {
         parent::__construct($request, $response, $session, $blade, $logger);
         $this->page = $page;
@@ -49,7 +46,7 @@ class PageController extends BaseController {
         $result = $this->getPageBySlug('home');
 
         if (!$result) {
-            throw new PageNotFoundException($result);
+            throw new PageNotFoundException($this->request, $this->response, $this->session, $this->blade, $this->logger, $result);
 
             return false;
         } else {
@@ -70,7 +67,7 @@ class PageController extends BaseController {
             $result = $this->getPageBySlug($slug);
 
             if (!$result) {
-                throw new PageNotFoundException($result);
+                throw new PageNotFoundException($this->request, $this->response, $this->session, $this->blade, $this->logger, $result);
 
                 return false;
             } else {

@@ -1,8 +1,10 @@
 .idea
 vendor/*
 .vagrant
-composer.lock
 .env
 phinx.yml
 cache/*
 storage/*
+composer.lock
+coverage/*
+src/Tests/Integration/test-data.xml
