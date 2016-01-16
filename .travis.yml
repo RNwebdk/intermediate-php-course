@@ -4,8 +4,7 @@ php:
   - 7.0.2
 
 before_script:
-  - travis_retry composer self-update
-  - composer install --dev
+  - composer install
 
 script:
  - phpunit -c phpunit.xml --coverage-text --coverage-clover=coverage.clover
