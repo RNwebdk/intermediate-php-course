@@ -1,7 +1,12 @@
 <?php
 namespace App\Tests;
 
-class PageControllerTest extends \PHPUnit_Framework_TestCase {
+/**
+ * Class PageControllerTest
+ * @package App\Tests
+ */
+class PageControllerTest extends \PHPUnit_Framework_TestCase
+{
 
     protected $request;
     protected $response;
@@ -10,6 +15,9 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase {
     protected $logger;
     protected $page;
 
+    /**
+     * Set things up
+     */
     protected function setUp()
     {
         $this->request = $this->getMockBuilder('Http\HttpRequest')
@@ -41,6 +49,9 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase {
     }
 
 
+    /**
+     * test showing a valid page
+     */
     public function testShowPageWithValidPage()
     {
 
@@ -68,6 +79,9 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase {
     }
 
 
+    /**
+     * test showing a page that does not exist
+     */
     public function testShowPageWithInvalidPage()
     {
         $controller = $this->getMockBuilder('App\Controllers\PageController')
