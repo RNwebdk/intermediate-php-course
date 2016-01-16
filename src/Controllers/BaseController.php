@@ -12,7 +12,8 @@ use Http\Response;
  * Class BaseController
  * @package App\Controllers
  */
-class BaseController {
+class BaseController
+{
 
     protected $request;
     protected $response;
@@ -113,7 +114,7 @@ class BaseController {
                             $errors[] = $this->prettify($field) . " must contain only digits!";
                         break;
                     case "float":
-                        if (!filter_var($value, FILTER_VALIDATE_INT))
+                        if (!filter_var($value, FILTER_VALIDATE_FLOAT))
                             $errors[] = $this->prettify($field) . " must be a decimal number!";
                         break;
                     case "url":
