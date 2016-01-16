@@ -1,7 +1,6 @@
 .idea
 vendor/*
 .vagrant
-composer.lock
 .env
 phinx.yml
 cache/*
