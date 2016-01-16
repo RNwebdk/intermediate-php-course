@@ -29,7 +29,8 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase {
             ->getMock();
 
         $monolog = $this->getMockBuilder('Monolog\Logger')
-            ->setConstructorArgs(['whatever'])
+//            ->setConstructorArgs(['whatever'])
+            ->disableOriginalConstructor()
             ->getMock();
 
         $this->logger = $this->getMockBuilder('App\Logging\Log')
