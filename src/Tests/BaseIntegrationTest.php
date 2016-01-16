@@ -4,7 +4,8 @@ namespace App\Tests;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use PDO;
 
-abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase {
+abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
+{
 
     protected $request;
     protected $response;
@@ -14,13 +15,13 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
     protected $page;
 
     /**
-     *
+     * Set things up
      */
     public function setUp()
     {
         require __DIR__ . '/../../vendor/autoload.php';
 
-        $dotenv = new \Dotenv\Dotenv(__DIR__."/../../");
+        $dotenv = new \Dotenv\Dotenv(__DIR__ . "/../../");
         $dotenv->load();
 
         $capsule = new Capsule();
@@ -80,6 +81,7 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
 
 
     /**
+     * Get Database connection
      * @return \PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection
      */
     public function getConnection()
@@ -100,9 +102,11 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
      * @param array $args
      * @return mixed
      */
-    protected function run_protected_method ($obj, $method, $args = array()) {
+    protected function run_protected_method($obj, $method, $args = [])
+    {
         $method = new \ReflectionMethod(get_class($obj), $method);
         $method->setAccessible(true);
+
         return $method->invokeArgs($obj, $args);
     }
 }

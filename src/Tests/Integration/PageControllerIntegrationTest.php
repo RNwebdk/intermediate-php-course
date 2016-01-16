@@ -4,12 +4,16 @@ namespace App\Tests;
 use App\Controllers\PageController;
 use App\models\Page;
 
+/**
+ * Class PageControllerIntegrationTest
+ * @package App\Tests
+ */
 class PageControllerIntegrationTest extends BaseIntegrationTest
 {
 
 
     /**
-     * Override setUp in parent and set value in $_SERVER
+     * Override setUp in parent and set values in $_POST
      */
     public function setUp()
     {
@@ -27,6 +31,9 @@ class PageControllerIntegrationTest extends BaseIntegrationTest
     }
 
 
+    /**
+     *
+     */
     public function testGetPageBySlugWithValidSlug()
     {
         $model = new Page();
@@ -43,6 +50,9 @@ class PageControllerIntegrationTest extends BaseIntegrationTest
 
     }
 
+    /**
+     *
+     */
     public function testGetPageBySlugWithInvalidSlug()
     {
         $model = new Page();
@@ -57,6 +67,9 @@ class PageControllerIntegrationTest extends BaseIntegrationTest
     }
 
 
+    /**
+     *
+     */
     public function testShowHome()
     {
         $model = new Page();
@@ -69,6 +82,9 @@ class PageControllerIntegrationTest extends BaseIntegrationTest
     }
 
 
+    /**
+     *
+     */
     public function testPrettify()
     {
         $controller = new PageController($this->request, $this->response, $this->session,
@@ -80,6 +96,9 @@ class PageControllerIntegrationTest extends BaseIntegrationTest
     }
 
 
+    /**
+     *
+     */
     public function testValidateWithValidData()
     {
         $controller = new PageController($this->request, $this->response, $this->session,
@@ -103,16 +122,19 @@ class PageControllerIntegrationTest extends BaseIntegrationTest
     }
 
 
+    /**
+     *
+     */
     public function testValidateWithInvalidData()
     {
         $controller = new PageController($this->request, $this->response, $this->session,
             $this->blade, $this->logger, $this->page);
 
         $rules = [
-            'first_name'                  => 'required|min:100',
-            'email'                       => 'email|max:1',
-            'number'                      => 'float',
-            'decimal'                     => 'digits',
+            'first_name' => 'required|min:100',
+            'email'      => 'email|max:1',
+            'number'     => 'float',
+            'decimal'    => 'digits',
         ];
 
         $errors = $this->run_protected_method($controller, 'validate', [$rules]);

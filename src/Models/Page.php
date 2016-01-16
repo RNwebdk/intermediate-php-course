@@ -2,6 +2,11 @@
 namespace App\models;
 
 
-class Page extends BaseModel {
+/**
+ * Class Page
+ * @package App\models
+ */
+class Page extends BaseModel
+{
 
 }

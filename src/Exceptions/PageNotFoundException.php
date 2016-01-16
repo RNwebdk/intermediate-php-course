@@ -7,7 +7,12 @@ use duncan3dc\Laravel\BladeInstance;
 use Http\Request;
 use Http\Response;
 
-class PageNotFoundException extends \Exception {
+/**
+ * Class PageNotFoundException
+ * @package App\Exceptions
+ */
+class PageNotFoundException extends \Exception
+{
 
     protected $request;
     protected $response;
@@ -15,6 +20,14 @@ class PageNotFoundException extends \Exception {
     protected $blade;
     protected $logger;
 
+    /**
+     * PageNotFoundException constructor.
+     * @param Request $request
+     * @param Response $response
+     * @param Session $session
+     * @param BladeInstance $blade
+     * @param Log $logger
+     */
     public function __construct(Request $request, Response $response,
                                 Session $session, BladeInstance $blade, Log $logger)
     {
@@ -25,13 +38,18 @@ class PageNotFoundException extends \Exception {
         $this->logger = $logger;
     }
 
+    /**
+     * @param $page
+     * @return mixed
+     */
     function handle($page)
     {
         $this->response->setHeader('HTTP/1.1', 404);
+
         return $this->response->setContent($this->blade->render("generic-page",
             [
                 'content' => $page . ' is an unknown page',
-                'title' => 'Page Not Found',
+                'title'   => 'Page Not Found',
             ]));
     }
 }

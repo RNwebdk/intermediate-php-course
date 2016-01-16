@@ -5,7 +5,8 @@ namespace App\Session;
  * Class Session
  * @package App\Session
  */
-interface Session {
+interface Session
+{
 
     /**
      * @param $name

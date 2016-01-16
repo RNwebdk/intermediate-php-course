@@ -21,6 +21,14 @@ class BaseController
     protected $blade;
     protected $logger;
 
+    /**
+     * BaseController constructor.
+     * @param Request $request
+     * @param Response $response
+     * @param Session $session
+     * @param BladeInstance $blade
+     * @param Log $logger
+     */
     public function __construct(Request $request, Response $response,
                                 Session $session, BladeInstance $blade, Log $logger)
     {

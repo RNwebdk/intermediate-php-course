@@ -4,12 +4,23 @@ namespace App\Logging;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-class Log {
+/**
+ * Class Log
+ * @package App\Logging
+ */
+class Log
+{
 
     protected $infoLog;
     protected $warningLog;
     protected $errorLog;
 
+    /**
+     * Log constructor.
+     * @param Logger $infoLog
+     * @param Logger $warningLog
+     * @param Logger $errorLog
+     */
     public function __construct(Logger $infoLog, Logger $warningLog, Logger $errorLog)
     {
         $this->infoLog = $infoLog;
@@ -21,6 +32,10 @@ class Log {
     }
 
 
+    /**
+     * @param $entry
+     * @return bool
+     */
     public function logInfo($entry)
     {
         $this->infoLog->addInfo($entry);
@@ -29,6 +44,10 @@ class Log {
     }
 
 
+    /**
+     * @param $entry
+     * @return bool
+     */
     public function logWarning($entry)
     {
         $this->warningLog->addWarning($entry);
@@ -36,6 +55,10 @@ class Log {
         return true;
     }
 
+    /**
+     * @param $entry
+     * @return bool
+     */
     public function logError($entry)
     {
         $this->errorLog->addError($entry);

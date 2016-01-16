@@ -15,7 +15,8 @@ use App\Logging\Log;
  * Class PageController
  * @package App\Controllers
  */
-class PageController extends BaseController {
+class PageController extends BaseController
+{
 
     protected $page;
 
@@ -28,12 +29,8 @@ class PageController extends BaseController {
      * @param Log $logger
      * @param Page $page
      */
-    public function __construct(Request $request,
-                                Response $response,
-                                Session $session,
-                                BladeInstance $blade,
-                                Log $logger,
-                                Page $page)
+    public function __construct(Request $request, Response $response, Session $session,
+                                BladeInstance $blade, Log $logger, Page $page)
     {
         parent::__construct($request, $response, $session, $blade, $logger);
         $this->page = $page;
