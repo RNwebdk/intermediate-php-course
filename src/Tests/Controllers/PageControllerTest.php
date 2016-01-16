@@ -1,6 +1,8 @@
 <?php
 namespace App\Tests;
 
+use Http\HttpRequest;
+
 class PageControllerTest extends \PHPUnit_Framework_TestCase {
 
     protected $request;
