@@ -5,3 +5,4 @@ vendor/*
 phinx.yml
 cache/*
 storage/*
+composer.lock
