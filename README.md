@@ -1,6 +1,6 @@
 # Modern Programming in PHP - Intermediate Level
 
-[![Build Status](https://travis-ci.org/tsawler/intermediate-php-course.svg)](https://travis-ci.org/tsawler/intermediate-php-course)
+[comment]: [![Build Status](https://travis-ci.org/tsawler/intermediate-php-course.svg)](https://travis-ci.org/tsawler/intermediate-php-course)
 
 Files for Udemy course [Modern Programming in PHP - Intermediate Level](https://www.udemy.com/modern-programming-in-php-intermediate-level)
 

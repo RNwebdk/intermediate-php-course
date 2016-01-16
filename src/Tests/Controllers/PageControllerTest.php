@@ -1,8 +1,6 @@
 <?php
 namespace App\Tests;
 
-use Http\HttpRequest;
-
 class PageControllerTest extends \PHPUnit_Framework_TestCase {
 
     protected $request;
@@ -15,9 +13,8 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase {
     protected function setUp()
     {
         $this->request = $this->getMockBuilder('Http\HttpRequest')
-            ->setMethods(['__construct'])
+            ->setMethods(null)
             ->setConstructorArgs([[], [], [], [], []])
-            ->disableOriginalConstructor()
             ->getMock();
 
         $this->response = $this->getMockBuilder('Http\HttpResponse')
@@ -27,21 +24,16 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase {
             ->getMock();
 
         $this->blade = $this->getMockBuilder('duncan3dc\Laravel\BladeInstance')
-            ->setMethods(['__construct'])
             ->setConstructorArgs(['whatever', 'whatever'])
-            ->disableOriginalConstructor()
             ->getMock();
 
         $monolog = $this->getMockBuilder('Monolog\Logger')
-            ->setMethods(['__construct'])
+            ->setMethods(null)
             ->setConstructorArgs(['whatever'])
-            ->disableOriginalConstructor()
             ->getMock();
 
         $this->logger = $this->getMockBuilder('App\Logging\Log')
-            ->setMethods(['construct'])
             ->setConstructorArgs([$monolog, $monolog, $monolog])
-            ->disableOriginalConstructor()
             ->getMock();
 
         $this->page = $this->getMockBuilder('App\Models\Page')
