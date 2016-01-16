@@ -49,7 +49,7 @@ class PageController extends BaseController {
         $result = $this->getPageBySlug('home');
 
         if (!$result) {
-            throw new PageNotFoundException($result);
+            throw new PageNotFoundException($this->request, $this->response, $this->session, $this->blade, $this->logger, $result);
 
             return false;
         } else {
@@ -70,7 +70,7 @@ class PageController extends BaseController {
             $result = $this->getPageBySlug($slug);
 
             if (!$result) {
-                throw new PageNotFoundException($result);
+                throw new PageNotFoundException($this->request, $this->response, $this->session, $this->blade, $this->logger, $result);
 
                 return false;
             } else {

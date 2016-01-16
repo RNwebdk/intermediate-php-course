@@ -9,6 +9,10 @@ h1 {
     margin-top: 3em;
 }
 
+.pushdown-title {
+    margin-top: 2em;
+}
+
 /* carousel fade */
 .carousel-fade .carousel-inner .item {
     opacity: 0;
