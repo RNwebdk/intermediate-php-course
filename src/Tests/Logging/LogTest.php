@@ -11,20 +11,17 @@ class LogTest extends \PHPUnit_Framework_TestCase {
     protected function setUp()
     {
         $this->logInfo = $this->getMockBuilder('Monolog\Logger')
-//            ->setConstructorArgs(['infolog'])
-            ->disableOriginalConstructor()
+            ->setConstructorArgs(['infolog'])
             ->setMethods([])
             ->getMock();
 
         $this->logWarning = $this->getMockBuilder('Monolog\Logger')
-//            ->setConstructorArgs(['warninglog'])
-            ->disableOriginalConstructor()
-            ->setMethods()
+            ->setMethods([])
+            ->setConstructorArgs(['warninglog'])
             ->getMock();
 
         $this->logError = $this->getMockBuilder('Monolog\Logger')
-//            ->setConstructorArgs(['errorlog'])
-            ->disableOriginalConstructor()
+            ->setConstructorArgs(['errorlog'])
             ->setMethods([])
             ->getMock();
     }
