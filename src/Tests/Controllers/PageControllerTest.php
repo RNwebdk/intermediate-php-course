@@ -22,7 +22,8 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->request = $this->getMockBuilder('Http\HttpRequest')
             ->setMethods(null)
-            ->setConstructorArgs([[], [], [], [], []])
+            ->disableOriginalConstructor()
+//            ->setConstructorArgs([[], [], [], [], []])
             ->getMock();
 
         $this->response = $this->getMockBuilder('Http\HttpResponse')
