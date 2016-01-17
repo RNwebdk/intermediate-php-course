@@ -41,10 +41,6 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
 
-//        $this->request = $this->getMockBuilder('Http\HttpRequest')
-//            ->setMethods(null)
-//            ->setConstructorArgs([$_GET, $_POST, $_COOKIE, $_FILES, $_SERVER])
-//            ->getMock();
         $this->request = new HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
 
         $this->response = $this->getMockBuilder('Http\HttpResponse')
@@ -54,7 +50,7 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
             ->getMock();
 
         $this->blade = $this->getMockBuilder('App\Renderers\BladeRenderer')
-            ->setConstructorArgs(['whatever', 'whatever'])
+            ->disableOriginalConstructor()
             ->getMock();
 
         $monolog = $this->getMockBuilder('Monolog\Logger')

@@ -22,7 +22,6 @@ class ResterControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->request = $this->getMockBuilder('Http\HttpRequest')
             ->setMethods(null)
-//            ->setConstructorArgs([[], [], [], [], []])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -33,18 +32,11 @@ class ResterControllerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->blade = $this->getMockBuilder('App\Renderers\BladeRenderer')
-//            ->setConstructorArgs(['whatever', 'whatever'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $monolog = $this->getMockBuilder('Monolog\Logger')
-//            ->setMethods([])
-//            ->setConstructorArgs(['whatever'])
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->logger = $this->getMockBuilder('App\Logging\Log')
-            ->setConstructorArgs([$monolog, $monolog, $monolog])
+            ->disableOriginalConstructor()
             ->getMock();
 
         $this->page = $this->getMockBuilder('App\Models\Page')
