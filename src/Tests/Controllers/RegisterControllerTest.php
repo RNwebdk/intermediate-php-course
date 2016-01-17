@@ -1,8 +1,6 @@
 <?php
 namespace App\Tests;
 
-use App\Controllers\RegisterController;
-
 /**
  * Class ResterControllerTest
  * @package App\Tests
@@ -10,9 +8,6 @@ use App\Controllers\RegisterController;
 class ResterControllerTest extends \PHPUnit_Framework_TestCase
 {
 
-    /**
-     * @var
-     */
     protected $request;
     protected $response;
     protected $session;
