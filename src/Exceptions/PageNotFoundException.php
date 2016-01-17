@@ -3,7 +3,7 @@ namespace App\Exceptions;
 
 use App\Logging\Log;
 use App\Session\Session;
-use duncan3dc\Laravel\BladeInstance;
+use App\Renderers\BladeRenderer;
 use Http\Request;
 use Http\Response;
 
@@ -25,11 +25,11 @@ class PageNotFoundException extends \Exception
      * @param Request $request
      * @param Response $response
      * @param Session $session
-     * @param BladeInstance $blade
+     * @param BladeRenderer $blade
      * @param Log $logger
      */
     public function __construct(Request $request, Response $response,
-                                Session $session, BladeInstance $blade, Log $logger)
+                                Session $session, BladeRenderer $blade, Log $logger)
     {
         $this->response = $response;
         $this->request = $request;

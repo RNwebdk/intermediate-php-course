@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
-use App\models\Page;
 use App\Exceptions\PageNotFoundException;
+use App\Logging\Log;
+use App\models\Page;
+use App\Renderers\BladeRenderer;
+use App\Session\Session;
 use Http\Request;
 use Http\Response;
-use App\Session\Session;
-use App\Logging\Log;
-use App\Renderers\BladeRenderer;
 
 
 /**
@@ -23,7 +23,7 @@ class PageController extends BaseController
     /**
      * PageController constructor.
      * @param Request $request
-     * @param HttpResponse $response
+     * @param Response $response
      * @param Session $session
      * @param BladeRenderer $blade
      * @param Log $logger
@@ -47,12 +47,12 @@ class PageController extends BaseController
         $result = $this->getPageBySlug('home');
 
         if (!$result) {
-            throw new PageNotFoundException($this->request, $this->response, $this->session, $this->blade, $this->logger, $result);
+            throw new PageNotFoundException($this->request, $this->response,
+                $this->session, $this->blade, $this->logger, $result);
 
             return false;
         } else {
-            $this->blade->with($result);
-            $template = $this->blade->render("home");
+            $template = $this->blade->with($result)->withTemplate("home")->render();
 
             return $this->response->setContent($template);
         }
@@ -71,11 +71,14 @@ class PageController extends BaseController
             $result = $this->getPageBySlug($slug);
 
             if (!$result) {
-                throw new PageNotFoundException($this->request, $this->response, $this->session, $this->blade, $this->logger, $result);
+                throw new PageNotFoundException($this->request, $this->response, $this->session,
+                    $this->blade, $this->logger, $result);
 
                 return false;
             } else {
-                return $this->response->setContent($this->blade->render("inside-page", $result));
+                $template = $this->blade->with($result)->withTemplate("inside-page")->render();
+
+                return $this->response->setContent($template);
             }
 
         } catch (PageNotFoundException $e) {
@@ -106,5 +109,4 @@ class PageController extends BaseController
             return false;
         }
     }
-
 }
