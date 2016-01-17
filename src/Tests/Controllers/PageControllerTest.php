@@ -31,7 +31,7 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
         $this->session = $this->getMockBuilder('App\Session\Session')
             ->getMock();
 
-        $this->blade = $this->getMockBuilder('duncan3dc\Laravel\BladeInstance')
+        $this->blade = $this->getMockBuilder('App\Renderers\BladeRenderer')
             ->setConstructorArgs(['whatever', 'whatever'])
             ->getMock();
 
@@ -54,12 +54,20 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testShowPageWithValidPage()
     {
+        $blade = $this->getMockBuilder('App\Renderers\BladeRenderer')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $blade->expects($this->any())
+            ->method(new \PHPUnit_Framework_Constraint_IsAnything())
+            ->will($this->returnSelf());
+
         $controller = $this->getMockBuilder('App\Controllers\PageController')
             ->setConstructorArgs([
                 $this->request,
                 $this->response,
                 $this->session,
-                $this->blade,
+                $blade,
                 $this->logger,
                 $this->page,
             ])

@@ -51,7 +51,7 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
         $this->session = $this->getMockBuilder('App\Session\Session')
             ->getMock();
 
-        $this->blade = $this->getMockBuilder('duncan3dc\Laravel\BladeInstance')
+        $this->blade = $this->getMockBuilder('App\Renderers\BladeRenderer')
             ->setConstructorArgs(['whatever', 'whatever'])
             ->getMock();
 
