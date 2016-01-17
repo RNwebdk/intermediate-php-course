@@ -38,8 +38,9 @@ class ResterControllerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $monolog = $this->getMockBuilder('Monolog\Logger')
-            ->setMethods(null)
-            ->setConstructorArgs(['whatever'])
+//            ->setMethods([])
+//            ->setConstructorArgs(['whatever'])
+            ->disableOriginalConstructor()
             ->getMock();
 
         $this->logger = $this->getMockBuilder('App\Logging\Log')

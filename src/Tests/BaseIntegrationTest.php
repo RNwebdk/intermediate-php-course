@@ -1,6 +1,7 @@
 <?php
 namespace App\Tests;
 
+use Http\HttpRequest;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use PDO;
 
@@ -40,10 +41,11 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
 
-        $this->request = $this->getMockBuilder('Http\HttpRequest')
-            ->setMethods(null)
-            ->setConstructorArgs([$_GET, $_POST, $_COOKIE, $_FILES, $_SERVER])
-            ->getMock();
+//        $this->request = $this->getMockBuilder('Http\HttpRequest')
+//            ->setMethods(null)
+//            ->setConstructorArgs([$_GET, $_POST, $_COOKIE, $_FILES, $_SERVER])
+//            ->getMock();
+        $this->request = new HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
 
         $this->response = $this->getMockBuilder('Http\HttpResponse')
             ->getMock();
