@@ -21,8 +21,8 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
     {
         require __DIR__ . '/../../vendor/autoload.php';
 
-        $dotenv = new \Dotenv\Dotenv(__DIR__ . "/../../");
-        $dotenv->load();
+//        $dotenv = new \Dotenv\Dotenv(__DIR__ . "/../../");
+//        $dotenv->load();
 
         $capsule = new Capsule();
 
@@ -30,8 +30,8 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
             'driver'    => 'mysql',
             'host'      => 'localhost',
             'database'  => 'appdb_test',
-            'username'  => 'vagrant',
-            'password'  => 'secret',
+            'username'  => 'travis',
+            'password'  => '',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
