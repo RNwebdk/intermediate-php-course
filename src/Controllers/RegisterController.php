@@ -15,7 +15,7 @@ class RegisterController extends BaseController
      */
     public function showRegister()
     {
-        return $this->response->setContent($this->blade->render("register"));
+        return $this->response->setContent($this->blade->withTemplate("register")->render());
     }
 
 
@@ -38,7 +38,11 @@ class RegisterController extends BaseController
         $errors = $this->validate($rules);
 
         if (sizeof($errors) > 0) {
-            $html = $this->blade->render("register", ['session' => $this->session]);
+            $html = $this->blade
+                ->with('session', $this->session)
+                ->withTemplate('register')
+                ->render();
+
             $new_html = $this->repopulateForm($html, $errors, $this->request->getParameters());
 
             return $this->response->setContent($new_html);

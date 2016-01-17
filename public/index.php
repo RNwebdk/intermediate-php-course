@@ -11,7 +11,10 @@ $request = $injector->make('Http\HttpRequest');
 $response = $injector->make('Http\HttpResponse');
 
 // inject blade
-$injector->make('duncan3dc\Laravel\BladeInstance');
+//$injector->make('duncan3dc\Laravel\BladeInstance');
+
+// inject our renderer
+$injector->make('App\Renderers\BladeRenderer');
 
 // inject session
 $session = $injector->make('App\Session\Session');

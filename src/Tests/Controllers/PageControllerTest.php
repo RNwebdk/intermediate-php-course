@@ -54,7 +54,6 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testShowPageWithValidPage()
     {
-
         $controller = $this->getMockBuilder('App\Controllers\PageController')
             ->setConstructorArgs([
                 $this->request,

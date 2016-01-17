@@ -22,9 +22,17 @@ $injector->alias('App\Session\Session', 'App\Session\NativeSession');
 $injector->share('App\Session\Session');
 
 // blade
-$injector->alias('duncan3dc\Laravel\BladeInstance', 'duncan3dc\Laravel\BladeInstance');
-$injector->share('duncan3dc\Laravel\BladeInstance');
-$injector->define('duncan3dc\Laravel\BladeInstance', [
+//$injector->alias('duncan3dc\Laravel\BladeInstance', 'duncan3dc\Laravel\BladeInstance');
+//$injector->share('duncan3dc\Laravel\BladeInstance');
+//$injector->define('duncan3dc\Laravel\BladeInstance', [
+//    ':path'     => getenv('VIEWS_DIRECTORY'),
+//    ':cache'    => getenv('CACHE_DIRECTORY')
+//]);
+
+// our renderer
+$injector->alias('App\Renderers\BladeRenderer', 'App\Renderers\BladeRenderer');
+$injector->share('App\Renderers\BladeRenderer');
+$injector->define('App\Renderers\BladeRenderer', [
     ':path'     => getenv('VIEWS_DIRECTORY'),
     ':cache'    => getenv('CACHE_DIRECTORY')
 ]);
