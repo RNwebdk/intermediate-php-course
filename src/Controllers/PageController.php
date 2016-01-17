@@ -7,8 +7,8 @@ use App\Exceptions\PageNotFoundException;
 use Http\Request;
 use Http\Response;
 use App\Session\Session;
-use duncan3dc\Laravel\BladeInstance;
 use App\Logging\Log;
+use App\Renderers\BladeRenderer;
 
 
 /**
@@ -25,12 +25,13 @@ class PageController extends BaseController
      * @param Request $request
      * @param HttpResponse $response
      * @param Session $session
-     * @param BladeInstance $blade
+     * @param BladeRenderer $blade
      * @param Log $logger
      * @param Page $page
      */
     public function __construct(Request $request, Response $response, Session $session,
-                                BladeInstance $blade, Log $logger, Page $page)
+                                BladeRenderer $blade, Log $logger,
+                                Page $page)
     {
         parent::__construct($request, $response, $session, $blade, $logger);
         $this->page = $page;
@@ -50,7 +51,10 @@ class PageController extends BaseController
 
             return false;
         } else {
-            return $this->response->setContent($this->blade->render("home", $result));
+            $this->blade->with($result);
+            $template = $this->blade->render("home");
+
+            return $this->response->setContent($template);
         }
 
     }
