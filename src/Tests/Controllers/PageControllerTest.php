@@ -33,7 +33,8 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->blade = $this->getMockBuilder('App\Renderers\BladeRenderer')
-            ->setConstructorArgs(['whatever', 'whatever'])
+//            ->setConstructorArgs(['whatever', 'whatever'])
+            ->disableOriginalConstructor()
             ->getMock();
 
         $monolog = $this->getMockBuilder('Monolog\Logger')
