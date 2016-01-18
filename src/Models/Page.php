@@ -4,7 +4,7 @@ namespace App\Models;
 
 /**
  * Class Page
- * @package App\models
+ * @package App\Models
  */
 class Page extends BaseModel
 {

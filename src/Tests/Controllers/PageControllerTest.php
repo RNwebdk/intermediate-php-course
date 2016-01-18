@@ -1,5 +1,9 @@
 <?php
 namespace App\Tests;
+use App\Renderers\BladeRenderer;
+use App\Session\NativeSession;
+use Http\HttpRequest;
+use Http\HttpResponse;
 
 /**
  * Class PageControllerTest
@@ -20,19 +24,25 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->request = $this->getMockBuilder('\Http\HttpRequest')
-            ->disableOriginalConstructor()
-            ->getMock();
+//        $this->request = $this->getMockBuilder('\Http\HttpRequest')
+//            ->disableOriginalConstructor()
+//            ->getMock();
+        $this->request = new HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
 
         $this->response = $this->getMockBuilder('\Http\HttpResponse')
             ->getMock();
+//        $this->response = new HttpResponse();
 
-        $this->session = $this->getMockBuilder('App\Session\Session')
-            ->getMock();
+//        $this->session = $this->getMockBuilder('App\Session\Session')
+//            ->getMock();
+
+        $this->session = new NativeSession();
 
         $this->blade = $this->getMockBuilder('App\Renderers\BladeRenderer')
             ->disableOriginalConstructor()
             ->getMock();
+
+//        $this->blade = new BladeRenderer('whatever', 'whatever');
 
         $this->logger = $this->getMockBuilder('App\Logging\Log')
             ->disableOriginalConstructor()

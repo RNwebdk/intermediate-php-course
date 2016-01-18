@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class BaseModel
- * @package App\models
+ * @package App\Models
  */
 abstract class BaseModel extends Eloquent
 {
