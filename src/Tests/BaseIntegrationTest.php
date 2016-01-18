@@ -22,9 +22,6 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
     {
         require __DIR__ . '/../../vendor/autoload.php';
 
-//        $dotenv = new \Dotenv\Dotenv(__DIR__ . "/../../");
-//        $dotenv->load();
-
         $capsule = new Capsule();
 
         $capsule->addConnection([
@@ -75,6 +72,7 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
     public function getDataSet()
     {
         return $this->createMySQLXMLDataSet(__DIR__ . "/Integration/test-data.xml");
+
     }
 
 
