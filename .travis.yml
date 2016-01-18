@@ -9,6 +9,7 @@ services:
 before_script:
   - composer install
   - mysql -e 'create database appdb_test;'
+  - vendor/bin/phinx --configuration phinx.yml.dist -e testing
 
 script:
  - phpunit --coverage-text --coverage-clover=coverage.clover
