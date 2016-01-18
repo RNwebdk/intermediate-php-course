@@ -1,6 +1,7 @@
 <?php
 namespace App\Tests;
 
+use Http\HttpRequest;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use PDO;
 
@@ -21,17 +22,14 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
     {
         require __DIR__ . '/../../vendor/autoload.php';
 
-        $dotenv = new \Dotenv\Dotenv(__DIR__ . "/../../");
-        $dotenv->load();
-
         $capsule = new Capsule();
 
         $capsule->addConnection([
             'driver'    => 'mysql',
             'host'      => 'localhost',
             'database'  => 'appdb_test',
-            'username'  => 'vagrant',
-            'password'  => 'secret',
+            'username'  => 'travis',
+            'password'  => '',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
@@ -40,22 +38,19 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
 
-        $this->request = $this->getMockBuilder('Http\HttpRequest')
-            ->setMethods(null)
-            ->setConstructorArgs([$_GET, $_POST, $_COOKIE, $_FILES, $_SERVER])
-            ->getMock();
+        $this->request = new HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
 
-        $this->response = $this->getMockBuilder('Http\HttpResponse')
+        $this->response = $this->getMockBuilder('\Http\HttpResponse')
             ->getMock();
 
         $this->session = $this->getMockBuilder('App\Session\Session')
             ->getMock();
 
         $this->blade = $this->getMockBuilder('App\Renderers\BladeRenderer')
-            ->setConstructorArgs(['whatever', 'whatever'])
+            ->disableOriginalConstructor()
             ->getMock();
 
-        $monolog = $this->getMockBuilder('Monolog\Logger')
+        $monolog = $this->getMockBuilder('\Monolog\Logger')
             ->setMethods(null)
             ->setConstructorArgs(['whatever'])
             ->getMock();
@@ -77,6 +72,7 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
     public function getDataSet()
     {
         return $this->createMySQLXMLDataSet(__DIR__ . "/Integration/test-data.xml");
+
     }
 
 
@@ -88,7 +84,7 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
     {
         $db = new PDO(
             "mysql:host=localhost;dbname=appdb_test",
-            "vagrant", "secret");
+            "travis", "");
 
         return $this->createDefaultDBConnection($db, "appdb_test");
     }

@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Exceptions\PageNotFoundException;
 use App\Logging\Log;
-use App\models\Page;
+use App\Models\Page;
 use App\Renderers\BladeRenderer;
 use App\Session\Session;
 use Http\Request;

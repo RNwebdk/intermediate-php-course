@@ -1,11 +1,11 @@
 <?php
-namespace App\models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class BaseModel
- * @package App\models
+ * @package App\Models
  */
 abstract class BaseModel extends Eloquent
 {

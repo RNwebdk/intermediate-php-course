@@ -1,18 +1,13 @@
 <?php
 namespace App\Tests;
 
-use App\Controllers\RegisterController;
-
 /**
  * Class ResterControllerTest
  * @package App\Tests
  */
-class ResterControllerTest extends \PHPUnit_Framework_TestCase
+class RegisterControllerTest extends \PHPUnit_Framework_TestCase
 {
 
-    /**
-     * @var
-     */
     protected $request;
     protected $response;
     protected $session;
@@ -25,28 +20,25 @@ class ResterControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->request = $this->getMockBuilder('Http\HttpRequest')
+        require __DIR__ . '/../../../vendor/autoload.php';
+
+        $this->request = $this->getMockBuilder('\Http\HttpRequest')
             ->setMethods(null)
-            ->setConstructorArgs([[], [], [], [], []])
+            ->disableOriginalConstructor()
             ->getMock();
 
-        $this->response = $this->getMockBuilder('Http\HttpResponse')
+        $this->response = $this->getMockBuilder('\Http\HttpResponse')
             ->getMock();
 
         $this->session = $this->getMockBuilder('App\Session\Session')
             ->getMock();
 
         $this->blade = $this->getMockBuilder('App\Renderers\BladeRenderer')
-            ->setConstructorArgs(['whatever', 'whatever'])
-            ->getMock();
-
-        $monolog = $this->getMockBuilder('Monolog\Logger')
-            ->setMethods(null)
-            ->setConstructorArgs(['whatever'])
+            ->disableOriginalConstructor()
             ->getMock();
 
         $this->logger = $this->getMockBuilder('App\Logging\Log')
-            ->setConstructorArgs([$monolog, $monolog, $monolog])
+            ->disableOriginalConstructor()
             ->getMock();
 
         $this->page = $this->getMockBuilder('App\Models\Page')

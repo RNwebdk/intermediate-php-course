@@ -11,8 +11,8 @@ class CreatePagesTable extends AbstractMigration
             ->addColumn('page_content', 'text')
             ->addColumn('page_title', 'string')
             ->addColumn('slug', 'string', ['default' => ''])
-            ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
-            ->addColumn('updated_at', 'datetime', ['null' => true])
+            ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
+            ->addColumn('updated_at', 'timestamp', ['null' => true])
             ->addIndex(['slug'], ['unique' => true])
             ->save();
     }

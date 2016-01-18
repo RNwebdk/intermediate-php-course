@@ -28,6 +28,8 @@ class PageControllerIntegrationTest extends BaseIntegrationTest
         $_POST['ip_address'] = '2.2.2.2';
 
         parent::setUp();
+
+
     }
 
 
