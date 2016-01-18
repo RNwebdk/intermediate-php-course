@@ -86,7 +86,7 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
     {
         $db = new PDO(
             "mysql:host=localhost;dbname=appdb_test",
-            "vagrant", "secret");
+            "travis", "");
 
         return $this->createDefaultDBConnection($db, "appdb_test");
     }
