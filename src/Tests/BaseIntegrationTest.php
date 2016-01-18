@@ -43,7 +43,7 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
 
         $this->request = new HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
 
-        $this->response = $this->getMockBuilder('Http\HttpResponse')
+        $this->response = $this->getMockBuilder('\Http\HttpResponse')
             ->getMock();
 
         $this->session = $this->getMockBuilder('App\Session\Session')
@@ -53,7 +53,7 @@ abstract class BaseIntegrationTest extends \PHPUnit_Extensions_Database_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $monolog = $this->getMockBuilder('Monolog\Logger')
+        $monolog = $this->getMockBuilder('\Monolog\Logger')
             ->setMethods(null)
             ->setConstructorArgs(['whatever'])
             ->getMock();

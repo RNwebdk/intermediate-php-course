@@ -20,12 +20,12 @@ class ResterControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->request = $this->getMockBuilder('Http\HttpRequest')
+        $this->request = $this->getMockBuilder('\Http\HttpRequest')
             ->setMethods(null)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->response = $this->getMockBuilder('Http\HttpResponse')
+        $this->response = $this->getMockBuilder('\Http\HttpResponse')
             ->getMock();
 
         $this->session = $this->getMockBuilder('App\Session\Session')
