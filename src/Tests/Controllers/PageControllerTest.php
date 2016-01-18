@@ -24,12 +24,14 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        require __DIR__ . '/../../../vendor/autoload.php';
+
 //        $this->request = $this->getMockBuilder('\Http\HttpRequest')
 //            ->disableOriginalConstructor()
 //            ->getMock();
         $this->request = new HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
 
-        $this->response = $this->getMockBuilder('\Http\HttpResponse')
+        $this->response = $this->getMockBuilder('Http\HttpResponse')
             ->getMock();
 //        $this->response = new HttpResponse();
 

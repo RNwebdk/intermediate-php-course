@@ -20,6 +20,8 @@ class ResterControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        require __DIR__ . '/../../../vendor/autoload.php';
+
         $this->request = $this->getMockBuilder('\Http\HttpRequest')
             ->setMethods(null)
             ->disableOriginalConstructor()
