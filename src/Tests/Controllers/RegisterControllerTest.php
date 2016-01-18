@@ -5,7 +5,7 @@ namespace App\Tests;
  * Class ResterControllerTest
  * @package App\Tests
  */
-class ResterControllerTest extends \PHPUnit_Framework_TestCase
+class RegisterControllerTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $request;

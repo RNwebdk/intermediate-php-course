@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="appdb">
+	<table_data name="pages">
+	<row>
+		<field name="id">1</field>
+		<field name="browser_title">Test Page</field>
+		<field name="page_content">&lt;p&gt;This is the page content served from the DB&lt;/p&gt;</field>
+		<field name="page_title">Test Page</field>
+		<field name="slug">test-page</field>
+		<field name="created_at">2016-01-12 02:25:02</field>
+		<field name="updated_at" xsi:nil="true" />
+	</row>
+	<row>
+		<field name="id">2</field>
+		<field name="browser_title">Worldwide Tourism</field>
+		<field name="page_content">&lt;p&gt;Here is the content for the home page&lt;/p&gt;</field>
+		<field name="page_title">Welcome to World Wide Tourism</field>
+		<field name="slug">home</field>
+		<field name="created_at">2016-01-14 00:02:27</field>
+		<field name="updated_at" xsi:nil="true" />
+	</row>
+	<row>
+		<field name="id">3</field>
+		<field name="browser_title">About Us</field>
+		<field name="page_content">&lt;p&gt;Lorem ipsum dolor sed amet.&lt;/p&gt;</field>
+		<field name="page_title">About Us</field>
+		<field name="slug">about</field>
+		<field name="created_at">2016-01-15 17:51:02</field>
+		<field name="updated_at" xsi:nil="true" />
+	</row>
+	</table_data>
+	<table_data name="phinxlog">
+	<row>
+		<field name="version">20160111191534</field>
+		<field name="start_time">2016-01-11 23:10:26</field>
+		<field name="end_time">2016-01-11 23:10:26</field>
+	</row>
+	</table_data>
+</database>
+</mysqldump>
