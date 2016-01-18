@@ -7,6 +7,7 @@ use App\Session\Session;
 use Http\Request;
 use Http\Response;
 use App\Renderers\BladeRenderer;
+use Sunra\PhpSimple\HtmlDomParser;
 
 /**
  * Class BaseController
@@ -134,6 +135,14 @@ class BaseController
                         if (!filter_var($value, FILTER_VALIDATE_IP))
                             $errors[] = $this->prettify($field) . " must be a valid IP address!";
                         break;
+                    case "unique":
+                        $table = 'App\\Models\\'  . $this_rule[1];
+                        $column = $this_rule[2];
+                        $model = new $table();
+                        $results = $model->where($column, '=', $value)->get();
+                        if (sizeof($results->toArray()) > 0)
+                            $errors[] = $this->prettify($field) . " already exists in this system!";
+                        break;
                     default:
                         //
                 }
@@ -151,6 +160,91 @@ class BaseController
     protected function prettify($field)
     {
         return ucwords(str_replace("_", " ", $field));
+    }
+
+
+    /**
+     * @param $html
+     * @param $errors
+     * @param $paramters
+     * @param string $div
+     * @param string $css
+     * @return mixed
+     */
+    public function repopulateForm($html, $errors, $paramters, $div = "error", $css = "alert alert-danger")
+    {
+        $dom = HtmlDomParser::str_get_html($html);
+
+        // repopulate form
+        foreach ($paramters as $name => $value) {
+
+            // first do inputs
+            $elements = $dom->find('input[name=' . $name . ']');
+            foreach ($elements as $element) {
+                $tag = $element->tag;
+                switch ($tag) {
+                    case ("input"):
+                        switch ($element->type) {
+                            case ("radio"):
+                                $element->checked = $element->value == $value ? true : null;
+                                break;
+                            case ("checkbox"):
+                                $element->checked = true;
+                                break;
+                            case ("select"):
+                                break;
+                            case ("text"):
+                                $element->value = $value;
+                                break;
+                            case ("email"):
+                                $element->value = $value;
+                                break;
+                            case("password"):
+                                $element->value = "";
+                                break;
+                            default:
+                                //
+                        }
+                        break;
+                    default:
+                        // nothing
+                }
+            }
+
+            // now do selects
+            $elements = $dom->find('select[name=' . $name . ']');
+            foreach ($elements as $element) {
+                $options = $element->find('option');
+                foreach ($options as $element1) {
+                    if ($element1->value == $value)
+                        $element1->selected = true;
+                    else {
+                        $element1->selected = null;
+                    }
+
+                }
+            }
+
+            // now do textareas
+            $elements = $dom->find('textarea[name=' . $name . ']');
+            foreach ($elements as $element) {
+                $element->innertext = $value;
+            }
+        }
+
+        // generate error message
+        $error_message = "<ul>";
+        foreach ($errors as $error) {
+            $error_message .= '<li>' . $error . '</li>';
+        }
+        $error_message .= "</ul>";
+
+        // insert error message
+        $error_div = $dom->find('#' . $div, 0);
+        $error_div->innertext = $error_message;
+        $error_div->class = $css;
+
+        return $dom->save();
     }
 
 }

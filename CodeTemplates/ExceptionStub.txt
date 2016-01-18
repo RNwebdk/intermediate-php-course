@@ -1,0 +1,11 @@
+<?php
+namespace App\Exceptions;
+
+/**
+ * Class !name!
+ * @package App\Exceptions
+ */
+class !name! extends \Exception
+{
+
+}
