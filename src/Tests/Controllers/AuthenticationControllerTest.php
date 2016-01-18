@@ -1,15 +1,15 @@
 <?php
 namespace App\Tests;
-use App\Renderers\BladeRenderer;
+
+use App\Controllers\AuthenticationController;
 use App\Session\NativeSession;
 use Http\HttpRequest;
-use Http\HttpResponse;
 
 /**
- * Class PageControllerTest
+ * Class AuthenticationControllerTest
  * @package App\Tests
  */
-class PageControllerTest extends \PHPUnit_Framework_TestCase
+class AuthenticationControllerTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $request;
@@ -46,10 +46,7 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    /**
-     * test showing a valid page
-     */
-    public function testShowPageWithValidPage()
+    public function testGetShowLoginPage()
     {
         $blade = $this->getMockBuilder('App\Renderers\BladeRenderer')
             ->disableOriginalConstructor()
@@ -59,7 +56,7 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
             ->method(new \PHPUnit_Framework_Constraint_IsAnything())
             ->will($this->returnSelf());
 
-        $controller = $this->getMockBuilder('App\Controllers\PageController')
+        $controller = $this->getMockBuilder('App\Controllers\AuthenticationController')
             ->setConstructorArgs([
                 $this->request,
                 $this->response,
@@ -68,46 +65,13 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
                 $this->logger,
                 $this->page,
             ])
-            ->setMethods(['getPageBySlug'])
             ->getMock();
 
-        $controller->method('getPageBySlug')
-            ->willReturn(['browser_title' => 'x', 'page_title' => 'x', 'page_content' => 'x']);
-
-        $result = $controller->showPage(['slug' => 'test-page']);
+        $result = $controller->showLogin(['slug' => 'test-page']);
 
         $actual = get_class($result);
         // if we have a valid slug, the class of the return value should be an PageControllerTest
-        $expected = 'App\Tests\PageControllerTest';
-        $this->assertEquals($actual, $expected);
-    }
-
-
-    /**
-     * test showing a page that does not exist
-     */
-    public function testShowPageWithInvalidPage()
-    {
-        $controller = $this->getMockBuilder('App\Controllers\PageController')
-            ->setConstructorArgs([
-                $this->request,
-                $this->response,
-                $this->session,
-                $this->blade,
-                $this->logger,
-                $this->page,
-            ])
-            ->setMethods(['getPageBySlug'])
-            ->getMock();
-
-        $controller->method('getPageBySlug')
-            ->willReturn(false);
-
-        $result = $controller->showPage(['slug' => 'test-page']);
-
-        $actual = get_class($result);
-        // if we have a non-existent slug, the class of the return value should be an PageNotFoundException
-        $expected = 'App\Exceptions\PageNotFoundException';
+        $expected = 'App\Tests\AuthenticationControllerTest';
         $this->assertEquals($actual, $expected);
     }
 
