@@ -19,6 +19,8 @@
             <h1>Log In</h1>
             <hr>
 
+            @include('partials.error')
+
             <div id="error" class="hidden"></div>
 
             <form class="form" role="form" method="post" action="/login" novalidate="novalidate">

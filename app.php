@@ -32,13 +32,14 @@ switch ($command) {
         }
         break;
 
-    case ('migrate'):
-        $phinxApp = new \Phinx\Console\PhinxApplication();
-        $phinxTextWrapper = new \Phinx\Wrapper\TextWrapper($phinxApp);
-        $phinxTextWrapper->setOption('configuration', __DIR__ . '/phinx.yml');
-        $phinxTextWrapper->setOption('parser', 'YAML');
-        $phinxTextWrapper->setOption('environment', 'development');
-        $log = $phinxTextWrapper->getMigrate();
+    case ('exception'):
+        if (file_exists(__DIR__ . "/src/Exceptions/" . $name . ".php")) {
+            printf("Exception already exists! Aborting...");
+            printf("\n\r");
+            exit;
+        } else {
+            makeException($name);
+        }
         break;
 
     case ('migration'):
@@ -82,5 +83,20 @@ function makeModel($name)
     fwrite($file, $model);
     fclose($file);
     printf("Model " . $name . " created");
+    printf("\n\r");
+}
+
+/**
+ * Create a stub exception
+ * @param $name
+ */
+function makeException($name)
+{
+    $exception = file_get_contents(__DIR__ . "/CodeTemplates/ExceptionStub.txt");
+    $exception = str_replace("!name!", $name, $exception);
+    $file = fopen(__DIR__ . "/src/Exceptions/" . $name . ".php", "w");
+    fwrite($file, $exception);
+    fclose($file);
+    printf("Exception " . $name . " created");
     printf("\n\r");
 }

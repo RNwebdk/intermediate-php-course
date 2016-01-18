@@ -135,6 +135,14 @@ class BaseController
                         if (!filter_var($value, FILTER_VALIDATE_IP))
                             $errors[] = $this->prettify($field) . " must be a valid IP address!";
                         break;
+                    case "unique":
+                        $table = 'App\\Models\\'  . $this_rule[1];
+                        $column = $this_rule[2];
+                        $model = new $table();
+                        $results = $model->where($column, '=', $value)->get();
+                        if (sizeof($results->toArray()) > 0)
+                            $errors[] = $this->prettify($field) . " already exists in this system!";
+                        break;
                     default:
                         //
                 }

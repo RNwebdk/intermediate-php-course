@@ -95,13 +95,13 @@
                     <div class="input-group">
                         <div class="radio">
                             <label>
-                                <input type="radio" name="join_mailing_list" value="1" id="join_list">
+                                <input type="radio" name="join_list" value="1" id="join_list">
                                 Yes
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="join_mailing_list" value="0" id="subscribe-no">
+                                <input type="radio" name="join_list" value="0" id="subscribe-no">
                                 No
                             </label>
                         </div>

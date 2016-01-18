@@ -1,6 +1,9 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\User;
+use Plasticbrain\FlashMessages\FlashMessages;
+
 class AuthenticationController extends BaseController
 {
 
@@ -29,7 +32,36 @@ class AuthenticationController extends BaseController
 
             return $this->response->setContent($new_html);
         } else {
-            return $this->response->setContent('Passed validation!');
+
+            // try logging in
+            $okay = true;
+            $email = $this->request->getParameter('email');
+            $password = $this->request->getParameter('password');
+
+            //look up the user
+            $user = User::where('email', '=', $email)
+                ->first();
+
+            if ($user != null) {
+                // validate credentials
+                if (! password_verify($password, $user->password)) {
+                    $okay = false;
+                }
+            } else {
+                $okay = false;
+            }
+
+            if ($okay) {
+                $this->session->put('user', $user);
+                return $this->response->redirect("/");
+            } else {
+                $this->session->put('errorMsg', 'Invalid Login!');
+                $flash = new FlashMessages();
+                $flash->error('Invalid Login');
+                $template = $this->blade->with('flash', $flash)->withTemplate("login")->render();
+
+                return $this->response->setContent($template);
+            }
         }
     }
 }
