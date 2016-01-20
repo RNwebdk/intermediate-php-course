@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
+[![Build Status](https://travis-ci.org/tsawler/intermediate-php-course.svg)](https://travis-ci.org/tsawler/intermediate-php-course)
 
 # Modern Programming in PHP - Intermediate Level
 
