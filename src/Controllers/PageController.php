@@ -52,7 +52,10 @@ class PageController extends BaseController
 
             return false;
         } else {
-            $template = $this->blade->with($result)->withTemplate("home")->render();
+            $template = $this->blade
+                ->with($result)
+                ->with('session', $this->session)
+                ->withTemplate("home")->render();
 
             return $this->response->setContent($template);
         }
@@ -76,7 +79,11 @@ class PageController extends BaseController
 
                 return false;
             } else {
-                $template = $this->blade->with($result)->withTemplate("inside-page")->render();
+                $template = $this->blade
+                    ->with($result)
+                    ->with('session', $this->session)
+                    ->withTemplate("inside-page")
+                    ->render();
 
                 return $this->response->setContent($template);
             }

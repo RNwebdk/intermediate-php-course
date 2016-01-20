@@ -96,6 +96,21 @@
                 <li><a href="/register">Register</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
+            @if(isset($session))
+                @if($session->has('user'))
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                @else
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/login"><i class="fa fa-lock"></i></a></li>
+                </ul>
+                @endif
+            @else
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/login"><i class="fa fa-lock"></i></a></li>
+                </ul>
+            @endif
         </div>
     </div>
 </nav>

@@ -6,5 +6,6 @@ return [
     ['POST', '/register', ['App\Controllers\RegisterController', 'handleRegister']],
     ['GET', '/login', ['App\Controllers\AuthenticationController', 'showLogin']],
     ['POST', '/login', ['App\Controllers\AuthenticationController', 'handleLogin']],
+    ['GET', '/logout', ['App\Controllers\AuthenticationController', 'logout']],
     ['GET', '/{slug}', ['App\Controllers\PageController', 'showPage']],
 ];

@@ -64,4 +64,11 @@ class AuthenticationController extends BaseController
             }
         }
     }
+
+
+    public function logout()
+    {
+        $this->session->forget('user');
+        $this->response->redirect('/login');
+    }
 }
