@@ -27,10 +27,17 @@ $injector->make('App\Logging\Log');
 $injector->make('App\Models\Page');
 
 // set up our routes
-$routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
+$routeDefinitionCallback = function (\FastRoute\RouteCollector $r) use ($session) {
     $routes = include(__DIR__ . '/../src/routes.php');
     foreach ($routes as $route) {
         $r->addRoute($route[0], $route[1], $route[2]);
+    }
+    // if logged in, add protected routes
+    if ($session->has('user')){
+        $protected_routes = include(__DIR__ . '/../src/protected-routes.php');
+        foreach ($protected_routes as $route) {
+            $r->addRoute($route[0], $route[1], $route[2]);
+        }
     }
 };
 
