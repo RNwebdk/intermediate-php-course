@@ -46,7 +46,7 @@ class PageNotFoundException extends \Exception
     {
         $this->response->setHeader('HTTP/1.1', 404);
 
-        return $this->response->setContent($this->blade->render("generic-page",
+        return $this->response->setContent($this->blade->with('session', $this->session)->render("generic-page",
             [
                 'content' => $page . ' is an unknown page',
                 'title'   => 'Page Not Found',

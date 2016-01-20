@@ -17,7 +17,9 @@ class RegisterController extends BaseController
      */
     public function showRegister()
     {
-        return $this->response->setContent($this->blade->withTemplate("register")->render());
+        return $this->response->setContent($this->blade
+            ->with('session', $this->session)
+            ->withTemplate("register")->render());
     }
 
 
@@ -65,7 +67,7 @@ class RegisterController extends BaseController
             $registration->join_list = $this->request->getParameter('join_list');
             $registration->save();
 
-            return $this->response->setContent($this->blade->render("generic-page",
+            return $this->response->setContent($this->blade->with('session', $this->session)->render("generic-page",
                 [
                     'content' => 'Thanks for joining our site!',
                     'title'   => 'Thanks!',
