@@ -4,6 +4,7 @@ use App\Renderers\BladeRenderer;
 use App\Session\NativeSession;
 use Http\HttpRequest;
 use Http\HttpResponse;
+use App\Exceptions\PageNotFoundException;
 
 /**
  * Class PageControllerTest
@@ -88,12 +89,20 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testShowPageWithInvalidPage()
     {
+        $blade = $this->getMockBuilder('App\Renderers\BladeRenderer')
+            ->setConstructorArgs(['whatever', 'whatever'])
+            ->setMethods(['render'])
+            ->getMock();
+
+        $blade->method('render')
+            ->willReturn(true);
+
         $controller = $this->getMockBuilder('App\Controllers\PageController')
             ->setConstructorArgs([
                 $this->request,
                 $this->response,
                 $this->session,
-                $this->blade,
+                $blade,
                 $this->logger,
                 $this->page,
             ])
@@ -103,12 +112,18 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
         $controller->method('getPageBySlug')
             ->willReturn(false);
 
+        $controller->expects($this->any())
+            ->method('showPage')
+            ->will($this->throwException(
+                new PageNotFoundException(
+                    $this->request, $this->response, $this->session, $this->blade, $this->logger)));
+
         $result = $controller->showPage(['slug' => 'test-page']);
 
         $actual = get_class($result);
         // if we have a non-existent slug, the class of the return value should be an PageNotFoundException
         $expected = 'App\Exceptions\PageNotFoundException';
-        $this->assertEquals($actual, $expected);
+        $this->assertEquals($expected, $actual);
     }
 
 }
