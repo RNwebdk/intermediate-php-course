@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/tsawler/intermediate-php-course.svg)](https://travis-ci.org/tsawler/intermediate-php-course)
+[![Code Climate](https://codeclimate.com/github/tsawler/intermediate-php-course/badges/gpa.svg)](https://codeclimate.com/github/tsawler/intermediate-php-course)
 
 # Modern Programming in PHP - Intermediate Level
 
@@ -7,7 +8,7 @@ Files for Udemy course [Modern Programming in PHP - Intermediate Level](https://
 In addition to the source, you'll need to:
 
 1. Install Vagrant & Virtualbox
-1. Run vagrant up from the root director of your project
+1. Run vagrant up from the root directory of your project
 1. Login to the VM with "vagrant ssh"
 1. cd /vagrant/installation
 1. sudo bash install (and answer the prompts)
