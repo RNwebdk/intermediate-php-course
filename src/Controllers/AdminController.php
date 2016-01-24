@@ -11,4 +11,10 @@ class AdminController extends BaseController {
                 'title'   => 'Super Secret',
             ]));
     }
+
+
+    public function showDashboard()
+    {
+        return $this->response->setContent($this->blade->render("admin.dashboard"));
+    }
 }

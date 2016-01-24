@@ -34,7 +34,7 @@ $injector->alias('App\Renderers\BladeRenderer', 'App\Renderers\BladeRenderer');
 $injector->share('App\Renderers\BladeRenderer');
 $injector->define('App\Renderers\BladeRenderer', [
     ':path'     => getenv('VIEWS_DIRECTORY'),
-    ':cache'    => getenv('CACHE_DIRECTORY')
+    ':cache'    => getenv('CACHE_DIRECTORY'),
 ]);
 
 // monolog

@@ -81,7 +81,6 @@ class PageController extends BaseController
             } else {
                 $template = $this->blade
                     ->with($result)
-                    ->with('session', $this->session)
                     ->withTemplate("inside-page")
                     ->render();
 
@@ -97,23 +96,4 @@ class PageController extends BaseController
         }
     }
 
-
-    /**
-     * @param $slug
-     * @return array|bool
-     */
-    protected function getPageBySlug($slug)
-    {
-        $result = $this->page->where('slug', '=', $slug)->first();
-
-        if ($result !== null) {
-            return [
-                'page_title'    => $result->page_title,
-                'page_content'  => $result->page_content,
-                'browser_title' => $result->browser_title,
-            ];
-        } else {
-            return false;
-        }
-    }
 }

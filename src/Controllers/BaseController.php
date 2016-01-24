@@ -136,7 +136,7 @@ class BaseController
                             $errors[] = $this->prettify($field) . " must be a valid IP address!";
                         break;
                     case "unique":
-                        $table = 'App\\Models\\'  . $this_rule[1];
+                        $table = 'App\\Models\\' . $this_rule[1];
                         $column = $this_rule[2];
                         $model = new $table();
                         $results = $model->where($column, '=', $value)->get();
@@ -245,6 +245,40 @@ class BaseController
         $error_div->class = $css;
 
         return $dom->save();
+    }
+
+
+    /**
+     * @param $blade
+     * @param $template
+     * @return mixed
+     */
+    public function showTemplatedPage($template)
+    {
+        return $this->response->setContent($this->blade
+            ->with('session', $this->session)
+            ->withTemplate($template)->render());
+    }
+
+
+    /**
+     * @param $slug
+     * @return array|bool
+     */
+    protected function getPageBySlug($slug)
+    {
+        $result = $this->page->where('slug', '=', $slug)->first();
+
+        if ($result !== null) {
+            return [
+                'page_title'    => $result->page_title,
+                'page_content'  => $result->page_content,
+                'browser_title' => $result->browser_title,
+                'session'       => $this->session,
+            ];
+        } else {
+            return false;
+        }
     }
 
 }
