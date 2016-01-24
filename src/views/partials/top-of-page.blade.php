@@ -99,6 +99,7 @@
             @if(isset($session))
                 @if($session->has('user'))
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/admin/dashboard">Admin</a></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 @else

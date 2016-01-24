@@ -13,7 +13,6 @@ class BladeRenderer extends BladeInstance implements Renderer
     protected $data = [];
     protected $template;
 
-
     /**
      * @param string $view
      * @param array $params
@@ -28,6 +27,7 @@ class BladeRenderer extends BladeInstance implements Renderer
             return parent::render($view, $this->data);
         else
             return parent::render($view, $params);
+
     }
 
 

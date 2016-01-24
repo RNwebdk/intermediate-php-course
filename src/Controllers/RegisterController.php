@@ -17,9 +17,7 @@ class RegisterController extends BaseController
      */
     public function showRegister()
     {
-        return $this->response->setContent($this->blade
-            ->with('session', $this->session)
-            ->withTemplate("register")->render());
+        $this->showTemplatedPage("register");
     }
 
 
